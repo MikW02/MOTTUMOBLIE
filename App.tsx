@@ -1,98 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from './Firebase';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Navegador from './app/Screens/Navegador'
+import Login from './app/Screens/Login'
+import Doar from './app/Screens/Doar';
+import Coleta from './app/Screens/Coleta';
+import SobreColeta from './app/Screens/SobreColeta';
+import Detalhes from './app/Screens/Detalhes';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const Stack = createNativeStackNavigator();
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const LoginStack = createNativeStackNavigator();
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+export default function App() {
+  
+  const[user,setUser] = useState<User | null>(null);
+  useEffect(() =>{
+  onAuthStateChanged(FIREBASE_AUTH,(user) => {
+    console.log('user',user);
+    setUser(user);
+  });
+},[]);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+  return ( 
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Login' >
+        {user ? (
+          <Stack.Screen name="Navegador" component={Navegador}/> 
+        ) : (
+          <Stack.Screen name="Login" component={Login} options = {{ headerShown: false }}/> 
+        )}
+                
+                <Stack.Screen name="Doar" component={Doar} />
+                <Stack.Screen name="Coleta" component={Coleta} />
+                <Stack.Screen name="SobreColeta" component={SobreColeta} />
+                <Stack.Screen name="Detalhes" component={Detalhes} />
+                
+        
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -114,5 +65,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default App;
