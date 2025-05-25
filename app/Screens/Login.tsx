@@ -48,7 +48,7 @@ const Login = () => {
 
     return (
         <View style={styles.containerText}>
-            <Image source={require('../Assets/LOGO.png')} style={styles.logoGrande}/>
+            <Image source={require('../Assets/LOGOMOTTU.png')} style={styles.logoGrande}/>
             <Text>Login</Text>
             <TextInput
                 value={email}

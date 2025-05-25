@@ -8,10 +8,11 @@ import { FIREBASE_AUTH } from './Firebase';
 
 import Navegador from './app/Screens/Navegador'
 import Login from './app/Screens/Login'
-import Doar from './app/Screens/Doar';
-import Coleta from './app/Screens/Coleta';
-import SobreColeta from './app/Screens/SobreColeta';
+import Patio from './app/Screens/Patio';
+import Registro from './app/Screens/Registro';
+import ComoUsar from './app/Screens/ComoUsar';
 import Detalhes from './app/Screens/Detalhes';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -36,10 +37,10 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} options = {{ headerShown: false }}/> 
         )}
                 
-                <Stack.Screen name="Doar" component={Doar} />
-                <Stack.Screen name="Coleta" component={Coleta} />
-                <Stack.Screen name="SobreColeta" component={SobreColeta} />
+                <Stack.Screen name="Registro" component={Registro} />
+                <Stack.Screen name="ComoUsar" component={ComoUsar} />
                 <Stack.Screen name="Detalhes" component={Detalhes} />
+                <Stack.Screen name="Patio" component={Patio} />
                 
         
       </Stack.Navigator>

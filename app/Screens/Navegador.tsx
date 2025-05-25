@@ -14,16 +14,16 @@ const Navegador = ({ navigation }: RouterProps) => {
         
         
         <View style={styles.containerNav}>
-            <ImageBackground source={require('../Assets/Oceano.png')} style={styles.backgroundImage}>
+            <ImageBackground source={require('../Assets/Fundo.png')} style={styles.backgroundImage}>
 
             <View style={styles.button}> 
-                <Button onPress={() => navigation.navigate('Coleta')} title="Registrar Coleta de Lixo em praia" />
-                <Button onPress={() => navigation.navigate('SobreColeta')} title="Como ganhar pontos" />  
-                <Button onPress={() => navigation.navigate('Doar')} title="Doar" />
+                <Button onPress={() => navigation.navigate('Patio')} title="Ver Patio" />
+                <Button onPress={() => navigation.navigate('ComoUsar')} title="Como ultilizar o app" />  
+                <Button onPress={() => navigation.navigate('Registro')} title="Registrar-se" />
                 <Button onPress={() => navigation.navigate('Detalhes')} title="Sobre nós" />
                 <Button onPress={() => FIREBASE_AUTH.signOut()} title="Deslogar" />
             </View>
-            <Image source={require('../Assets/LOGO.png')} style={styles.logoNav}/>
+            <Image source={require('../Assets/LOGOMOTTU.png')} style={styles.logoNav}/>
             </ImageBackground>
         </View>
     );
